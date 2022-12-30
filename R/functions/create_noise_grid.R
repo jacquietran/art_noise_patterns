@@ -1,15 +1,20 @@
 create_noise_grid <- function(
     seed_num, octaves_num, fracture_noise = c(
-      "worley", "simplex", "cubic", "value", "perlin", "spheres", "waves")){
+      "worley", "simplex", "cubic", "value", "perlin", "spheres", "waves"),
+    length_out){
   
   # Requires {ambient}, {dplyr}
+  
+  if(missing(length_out)){
+    length_out <- 1000
+  }
   
   # Worley noise
   if(fracture_noise == "worley"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -29,8 +34,8 @@ create_noise_grid <- function(
   if(fracture_noise == "simplex"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -50,8 +55,8 @@ create_noise_grid <- function(
   if(fracture_noise == "cubic"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -71,8 +76,8 @@ create_noise_grid <- function(
   if(fracture_noise == "value"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -92,8 +97,8 @@ create_noise_grid <- function(
   if(fracture_noise == "perlin"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -113,8 +118,8 @@ create_noise_grid <- function(
   if(fracture_noise == "spheres"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
@@ -134,8 +139,8 @@ create_noise_grid <- function(
   if(fracture_noise == "waves"){
     
     grid <- ambient::long_grid(
-      x = seq(0, 10, length.out = 1000), 
-      y = seq(0, 10, length.out = 1000)) |>
+      x = seq(0, 10, length.out = length_out), 
+      y = seq(0, 10, length.out = length_out)) |>
       dplyr::mutate(
         x1 = x + ambient::gen_simplex(x, y) / 2, 
         y1 = y + ambient::gen_simplex(x, y) / 2,
